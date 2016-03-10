@@ -37,7 +37,7 @@ Date.prototype.customFormat = function(formatString){
         page_age.style.right = 0;
         page_age.style.backgroundColor = "white";
         page_age.style.padding = "6px 10px"
-        page_age.textContent = date.customFormat( "#MMM# #M#, #YYYY#: #hh#:#mm#:#ss# #AMPM#" );
+        page_age.textContent = date.customFormat( "#MMM# #D#, #YYYY#: #hh#:#mm#:#ss# #AMPM#" );
         document.body.appendChild(page_age);
     } else {
         var page_age = document.getElementById("page_age")
