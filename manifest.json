@@ -21,5 +21,11 @@
     "https://*/*",
     "http://*/*",
     "tabs"
-  ]
+  ],
+    "content_scripts": [
+        {
+          "matches": ["http://*/*", "https://*/*"],
+          "css" : ["style.css"]
+        }
+    ]
 }

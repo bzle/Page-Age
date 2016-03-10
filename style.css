@@ -1,0 +1,20 @@
+#page_age.page_age--visible {
+    display: block;
+}
+#page_age.hidden {
+    display: none;
+}
+.page_age--visible {
+    background-color: white;
+    border: 1px solid #f5f5f5;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.075);
+    padding: 7px 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+.page_age--visible > div {
+}
+#time_elapsed {
+    color: #bbb;
+}

@@ -20,34 +20,77 @@ Date.prototype.customFormat = function(formatString){
   return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);
 };
 
+function millisecondsToStr (milliseconds) {
+    // TIP: to find current time in milliseconds, use:
+    // var  current_time_milliseconds = new Date().getTime();
+
+    function numberEnding (number) {
+        return (number > 1) ? 's' : '';
+    }
+
+    var temp = Math.floor(milliseconds / 1000);
+    var years = Math.floor(temp / 31536000);
+    if (years) {
+        return years + ' year' + numberEnding(years);
+    }
+    //TODO: Months! Maybe weeks? 
+    var days = Math.floor((temp %= 31536000) / 86400);
+    if (days) {
+        return days + ' day' + numberEnding(days);
+    }
+    var hours = Math.floor((temp %= 86400) / 3600);
+    if (hours) {
+        return hours + ' hour' + numberEnding(hours);
+    }
+    var minutes = Math.floor((temp %= 3600) / 60);
+    if (minutes) {
+        return minutes + ' minute' + numberEnding(minutes);
+    }
+    var seconds = temp % 60;
+    if (seconds) {
+        return seconds + ' second' + numberEnding(seconds);
+    }
+    return 'less than a second'; //'just now' //or other string you like;
+}
+
 (function() {
 
+    var birth_date = new Date(performance.timing.domLoading);
+    var time_elapsed = document.createElement("div");
+    time_elapsed.id = "time_elapsed";
+    
     if (!document.getElementById("page_age")) {
-        // just place a div at top right
-        var time = performance.timing.domLoading;
-        var date = new Date(time);
-
         var page_age = document.createElement("div");
         page_age.id = "page_age";
-        page_age.className = "visible";
-        page_age.class = "visible";
-        page_age.style.display = "block";
-        page_age.style.position = "fixed";
-        page_age.style.top = 0;
-        page_age.style.right = 0;
-        page_age.style.backgroundColor = "white";
-        page_age.style.padding = "6px 10px"
-        page_age.textContent = date.customFormat( "#MMM# #D#, #YYYY#: #hh#:#mm#:#ss# #AMPM#" );
+        var birth_date_div = document.createElement("div");
+        birth_date_div.id = "birth_date";
         document.body.appendChild(page_age);
+        document.getElementById("page_age").appendChild(birth_date_div);
+        page_age.className = "page_age--visible";
+        page_age.textContent = birth_date.customFormat( "#MMM# #D#, #YYYY# - #h#:#mm#:#ss# #AMPM#" );
+        document.getElementById("page_age").appendChild(time_elapsed);
     } else {
         var page_age = document.getElementById("page_age")
-        if (page_age.classList.contains("visible")) {
-            page_age.style.display = "none";
+        if (page_age.classList.contains("page_age--visible")) {
             page_age.className = "hidden";
         } else {
-            page_age.style.display = "block";
-            page_age.className = "visible";
+            page_age.className = "page_age--visible";
         }
     }
     
+    var current_date = new Date();
+    var date_difference = current_date - birth_date;
+    document.getElementById("time_elapsed").textContent = millisecondsToStr(date_difference)+" old";
+    
 })();
+
+
+
+
+
+
+
+
+
+
+
