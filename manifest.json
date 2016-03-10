@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Page Age",
-  "description": "Find how old the page/tab is (when you originally loaded)",
+  "description": "Find the age of a page/tab (the date/time you originally loaded it)",
   "version": "1.1.1",
   "icons": {
       "128": "icon128.png"
