@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Page Age",
+  "description": "Find how old the page/tab is (when you originally loaded)",
+  "version": "1.0",
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs"
+  ]
+}
